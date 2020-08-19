@@ -4,7 +4,7 @@
   "description": "An exercise for an introduction to React",
   "main": "index.js",
   "scripts": {
-    "start":"parcel index.html",
+    "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -18,10 +18,21 @@
   },
   "homepage": "https://github.com/Vegabytes/react-course-wishlist#readme",
   "dependencies": {
+    "husky": "^4.2.5",
+    "lint-staged": "^10.2.11",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
   "devDependencies": {
-    "parcel-bundler": "^1.12.4"
+    "eslint": "^7.7.0",
+    "eslint-plugin-react": "^7.20.6"
+  },
+  "husky": {
+    "hooks":{
+      "pre-commit":"lint-staged"
+    }
+  },
+  "lint-staged": {
+    "src/**/*.{ja,jax}" : ["npm run lint"]
   }
 }

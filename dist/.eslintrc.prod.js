@@ -1,0 +1,1 @@
+"use strict";module.exports={extends:"airbnb",env:{browser:!0},rules:{"linebreak-style":"off"}};
