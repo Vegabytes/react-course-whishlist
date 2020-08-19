@@ -28,7 +28,8 @@
   },
   "prettier": {
     "trailingComma": "all",
-    "singleQuote": true
+    "singleQuote": true,
+    "semi":true
   },
   "devDependencies": {
     "eslint": "^7.7.0",
