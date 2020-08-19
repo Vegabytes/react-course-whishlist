@@ -6,8 +6,8 @@
   "scripts": {
     "start": "parcel index.html",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "script":"",
-    "lint":"eslint --fix"
+    "format": "prettier --write \"*.{js,jsx,json,css}\"",
+    "lint": "eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -27,8 +27,8 @@
     "react-dom": "^16.13.1"
   },
   "prettier": {
-    "trailingComma":"all",
-    "singleQuote":true
+    "trailingComma": "all",
+    "singleQuote": true
   },
   "devDependencies": {
     "eslint": "^7.7.0",
@@ -40,8 +40,12 @@
     }
   },
   "lint-staged": {
-    "src/**/*.{ja,jax}": [
+    "src/**/*.{js,jsx}": [
       "npm run lint"
+    ],
+    "src/**/*.{js,jsx,json,css,scss}":[
+      "prettier --write",
+      "git add"
     ]
   }
 }
