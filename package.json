@@ -45,8 +45,7 @@
       "npm run lint"
     ],
     "src/**/*.{js,jsx,json,css,scss}":[
-      "prettier --write",
-      "git add"
+      "npm run format"
     ]
   }
 }
