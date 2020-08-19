@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "parcel index.html",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "script":"",
+    "lint":"eslint --fix"
   },
   "repository": {
     "type": "git",
@@ -20,19 +22,26 @@
   "dependencies": {
     "husky": "^4.2.5",
     "lint-staged": "^10.2.11",
+    "prettier": "^2.0.5",
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
+  },
+  "prettier": {
+    "trailingComma":"all",
+    "singleQuote":true
   },
   "devDependencies": {
     "eslint": "^7.7.0",
     "eslint-plugin-react": "^7.20.6"
   },
   "husky": {
-    "hooks":{
-      "pre-commit":"lint-staged"
+    "hooks": {
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "src/**/*.{ja,jax}" : ["npm run lint"]
+    "src/**/*.{ja,jax}": [
+      "npm run lint"
+    ]
   }
 }
