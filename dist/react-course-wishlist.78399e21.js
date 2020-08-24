@@ -29273,7 +29273,7 @@ if ("development" !== 'production') {
   // http://fb.me/prop-types-in-prod
   module.exports = require('./factoryWithThrowingShims')();
 }
-},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"src/App/Wishlist/Wishlist.jsx":[function(require,module,exports) {
+},{"react-is":"node_modules/react-is/index.js","./factoryWithTypeCheckers":"node_modules/prop-types/factoryWithTypeCheckers.js"}],"src/App/Wishlist/Wishitem.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29289,40 +29289,103 @@ var _propTypes = _interopRequireDefault(require("prop-types"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var Wishitem = function Wishitem(_ref) {
+  var done = _ref.done,
+      text = _ref.text,
+      id = _ref.id,
+      onDoneChange = _ref.onDoneChange;
+  return /*#__PURE__*/_react.default.createElement("li", {
+    className: (0, _classnames.default)('wish-list__item', {
+      'wish-list__item--done': done
+    })
+  }, /*#__PURE__*/_react.default.createElement("input", {
+    id: id,
+    type: "checkbox",
+    checked: done,
+    onChange: function onChange(e) {
+      return onDoneChange(e.target.checked);
+    }
+  }), /*#__PURE__*/_react.default.createElement("label", {
+    htmlFor: id
+  }, text));
+};
+
+Wishitem.propTypes = {
+  done: _propTypes.default.bool,
+  text: _propTypes.default.text,
+  id: _propTypes.default.string,
+  onDoneChange: _propTypes.default.func
+};
+Wishitem.defaultProps = {
+  done: false,
+  text: '',
+  id: '',
+  onDoneChange: function onDoneChange() {}
+};
+var _default = Wishitem;
+exports.default = _default;
+},{"react":"node_modules/react/index.js","classnames":"node_modules/classnames/index.js","prop-types":"node_modules/prop-types/index.js"}],"src/App/Wishlist/Wishlist.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireDefault(require("react"));
+
+var _Wishitem = _interopRequireDefault(require("./Wishitem.jsx"));
+
+var _propTypes = _interopRequireDefault(require("prop-types"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 var Wishlist = function Wishlist(_ref) {
-  var wishes = _ref.wishes;
+  var wishes = _ref.wishes,
+      onWishesChange = _ref.onWishesChange;
   return /*#__PURE__*/_react.default.createElement("ul", {
     className: "wish-list"
   }, wishes.map(function (_ref2, i) {
     var done = _ref2.done,
         text = _ref2.text;
-    return /*#__PURE__*/_react.default.createElement("li", {
-      key: text,
-      className: (0, _classnames.default)('wish-list__item', {
-        'wish-list__item--done': done
-      })
-    }, /*#__PURE__*/_react.default.createElement("input", {
+    return /*#__PURE__*/_react.default.createElement(_Wishitem.default, {
+      done: done,
+      text: text,
       id: "wish".concat(i),
-      type: "checkbox",
-      checked: done
-    }), /*#__PURE__*/_react.default.createElement("label", {
-      htmlFor: "wish".concat(i)
-    }, text));
+      key: text,
+      onDoneChange: function onDoneChange(value) {
+        var updatedWishes = _toConsumableArray(wishes);
+
+        updatedWishes[i].done = value;
+        onWishesChange(updatedWishes);
+      }
+    });
   }));
 };
 
 Wishlist.propTypes = {
-  wishes: _propTypes.default.arrayOf(_propTypes.default.shape({
-    done: _propTypes.default.bool,
-    text: _propTypes.default.text
-  }))
+  wishes: _propTypes.default.arrayOf(_propTypes.default.shape(_Wishitem.default.propTypes)),
+  onWishesChange: _propTypes.default.func
 };
 Wishlist.defaultProps = {
-  wishes: []
+  wishes: [],
+  onWishesChange: function onWishesChange() {}
 };
 var _default = Wishlist;
 exports.default = _default;
-},{"react":"node_modules/react/index.js","classnames":"node_modules/classnames/index.js","prop-types":"node_modules/prop-types/index.js"}],"src/App/Wishinput/Wishinput.jsx":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Wishitem.jsx":"src/App/Wishlist/Wishitem.jsx","prop-types":"node_modules/prop-types/index.js"}],"src/App/Wishinput/Wishinput.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -29462,10 +29525,16 @@ var App = function App() {
       return setWishes([wish].concat(_toConsumableArray(wishes)));
     }
   }), /*#__PURE__*/_react.default.createElement(_Wishlist.default, {
-    wishes: wishes
+    wishes: wishes,
+    onWishesChange: setWishes
   }), /*#__PURE__*/_react.default.createElement("button", {
     type: "button",
-    className: "wish-clear"
+    className: "wish-clear",
+    onClick: function onClick() {
+      setWishes(wishes.filter(function (wish) {
+        return !wish.done;
+      }));
+    }
   }, "Archive done"));
 };
 
