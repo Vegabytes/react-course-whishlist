@@ -1,37 +1,27 @@
-import React from 'react';
-import classNames from 'classnames';
-import './App.css';
+import React, {useState} from 'react';
 
-const wishes = [
+import './App.css';
+import Wishlist from './Wishlist/Wishlist.jsx';
+import Wishinput from './Wishinput/Wishinput.jsx';
+
+const initialWishes = [
   { done: false, text: 'Travel to the moon' },
   { done: true, text: 'Make an intro course to React' },
   { done: true, text: 'Pay the gym' },
   { done: false, text: 'Go to the gym' },
 ];
-const App = () => (
+const App = () => {
+  const [wishes,setWishes] = useState(initialWishes);
+  return (
   <div className="app">
     <h1>My wishlist</h1>
-    <fieldset className="wish-input">
-      <legend className="wish-input__label">New wish</legend>
-      <input className="wish-input__field" placeholder="Enter your wish here" />
-    </fieldset>
-    <ul className="wish-list">
-      {wishes.map(({ done, text }, i) => (
-        <li
-          key={text}
-          className={classNames('wish-list__item', {
-            'wish-list__item--done': done,
-          })}
-        >
-          <input id={`wish${i}`} type="checkbox" checked={done} />
-          <label htmlFor={`wish${i}`}>{text}</label>
-        </li>
-      ))}
-    </ul>
+    <Wishinput onNewWish={wish => setWishes([wish,...wishes])}/>
+    <Wishlist wishes={wishes}/>
     <button type="button" className="wish-clear">
       Archive done
     </button>
   </div>
 );
+  }
 
 export default App;
